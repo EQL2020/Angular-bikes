@@ -22,9 +22,9 @@ getContracts() : Observable<Contract[] > {
 
 }
 
-getStations() : Observable<Station[]> {
+getStations(contract : string) : Observable<Station[]> {
 
-  var stationsUrl = `https://api.jcdecaux.com/vls/v1/stations?contract=creteil&apiKey=${this.apiKey}`;
+  var stationsUrl = `https://api.jcdecaux.com/vls/v1/stations?contract=${contract}&apiKey=${this.apiKey}`;
 
   //return of(STATIONS);
   //return this.http.get<Station[]>(stationsUrl);

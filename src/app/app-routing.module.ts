@@ -6,7 +6,7 @@ import { StationsComponent } from './stations/stations.component';
 
 const routes: Routes = [
   {path : 'contracts', component : ContractsComponent},
-  {path: 'creteil', component:StationsComponent},
+  {path: 'stations/:contract', component:StationsComponent},
   {path : '', component : ContractsComponent},
 ];
 

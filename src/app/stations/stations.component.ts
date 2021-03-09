@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Station } from '../model/station';
 import { MessagesService } from '../services/messages.service';
 import { StationService } from '../services/station.service';
@@ -14,10 +15,18 @@ export class StationsComponent implements OnInit {
   selectedStation? : Station;
 
   constructor(private stationService : StationService,
-              private messagesService : MessagesService) { }
+              private messagesService : MessagesService,
+              private route : ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getStations();
+    // /stations/toulouse
+    //var contract = this.route.snapshot.paramMap.get("contract");
+    //this.getStations(contract);
+
+    this.route.paramMap.subscribe(params => {
+      var contract = params.get("contract");
+      this.getStations(contract);
+    });
   }
 
   onSelect(station:Station):void {
@@ -25,10 +34,10 @@ export class StationsComponent implements OnInit {
     this.messagesService.addMessage("Station numéro" + station.id + " sélectionnée");
   }
 
-  getStations():void {
-    this.messagesService.addMessage("récupération de la liste des stations");
-    this.stationService.getStations()
-        .subscribe(jsonData => this.stations = jsonData); 
+  getStations(contract):void {
+    this.messagesService.addMessage("récupération de la liste des stations de " + contract);
+    this.stationService.getStations(contract)
+                       .subscribe(jsonData => this.stations = jsonData); 
   }
 
 }
