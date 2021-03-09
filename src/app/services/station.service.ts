@@ -23,7 +23,8 @@ getContracts() : Observable<Contract[] > {
 }
 
 getStations(contract : string) : Observable<Station[]> {
-
+  
+ 
   var stationsUrl = `https://api.jcdecaux.com/vls/v1/stations?contract=${contract}&apiKey=${this.apiKey}`;
 
   //return of(STATIONS);
@@ -35,6 +36,8 @@ getStations(contract : string) : Observable<Station[]> {
 
 private jcdToContracts(jcdContracts){
   
+  
+
   let contracts : Contract[] = [];
 
   jcdContracts.forEach(jcd => {

@@ -13,6 +13,7 @@ export class StationsComponent implements OnInit {
 
   stations : Station[] = [];
   selectedStation? : Station;
+  isSearching = false;
 
   constructor(private stationService : StationService,
               private messagesService : MessagesService,
@@ -35,9 +36,13 @@ export class StationsComponent implements OnInit {
   }
 
   getStations(contract):void {
+    this.isSearching = true;
     this.messagesService.addMessage("récupération de la liste des stations de " + contract);
     this.stationService.getStations(contract)
-                       .subscribe(jsonData => this.stations = jsonData); 
+                       .subscribe(jsonData => {
+                            this.stations = jsonData; 
+                            this.isSearching = false;
+                          }); 
   }
 
 }

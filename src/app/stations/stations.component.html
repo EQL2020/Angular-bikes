@@ -1,5 +1,7 @@
 <h2>Stations disponibles</h2>
 
+<img src="wait.gif" [class.hidden]="isSearching == false"/>
+
 <ul class="stations">
     <li *ngFor="let station of stations" (click)="onSelect(station)">{{station.name}}</li>
 </ul>
