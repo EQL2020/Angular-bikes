@@ -1,0 +1,9 @@
+<section id="messages">
+
+  <button (click)="clearMessages()">Clear</button>
+
+  <div *ngFor="let message of messages">
+    {{message}}
+  </div>
+
+</section>
