@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { StationsComponent } from './stations/stations.component';
 import { StationComponent } from './station/station.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ContractsComponent } from './contracts/contracts.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
     StationsComponent,
     StationComponent,
-      MessagesComponent
+      MessagesComponent,
+      ContractsComponent
    ],
   imports: [
     BrowserModule,

@@ -1,0 +1,8 @@
+<h2>Contracts</h2>
+
+<ul>
+  <li *ngFor="let contract of contracts">
+      <a href="/stations/{{contract.city}}">{{contract.name | uppercase}} - {{contract.city}}</a>
+  </li>
+
+</ul>

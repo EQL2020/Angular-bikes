@@ -8,7 +8,7 @@ import { MessagesService } from './services/messages.service';
 })
 export class AppComponent implements OnInit {
 
-  nbMessages;
+  messages : string[];
   title = 'Bike Manager';
 
   constructor(private messagesService:MessagesService)
@@ -16,8 +16,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.messagesService.getMessagesCount()
-                        .subscribe(nbMsg => this.nbMessages = nbMsg);
+    this.messages = this.messagesService.getMessages();
   }
 
 }

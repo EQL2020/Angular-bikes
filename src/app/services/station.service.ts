@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {map} from 'rxjs/operators';
+import { Contract } from '../model/contract';
 import { Station } from '../model/station';
 
 @Injectable({
@@ -10,18 +11,47 @@ import { Station } from '../model/station';
 })
 export class StationService {
 
+  private apiKey = "4672fe7952d24de01bef059e6e8f2570858dcd5d";
+
 constructor(private http : HttpClient) { }
 
+getContracts() : Observable<Contract[] > {
+  var serviceUrl = `https://api.jcdecaux.com/vls/v3/contracts?apiKey=${this.apiKey}`;
+  return this.http.get(serviceUrl)
+                  .pipe(map(jcdContracts => this.jcdToContracts(jcdContracts)));
+
+}
 
 getStations() : Observable<Station[]> {
 
-  var stationsUrl = 'https://api.jcdecaux.com/vls/v1/stations?contract=creteil&apiKey=4672fe7952d24de01bef059e6e8f2570858dcd5d';
+  var stationsUrl = `https://api.jcdecaux.com/vls/v1/stations?contract=creteil&apiKey=${this.apiKey}`;
 
   //return of(STATIONS);
   //return this.http.get<Station[]>(stationsUrl);
   return this.http.get(stationsUrl)
              .pipe(map(jcdStations => this.jcdToStations(jcdStations)));
   }
+
+
+private jcdToContracts(jcdContracts){
+  
+  let contracts : Contract[] = [];
+
+  jcdContracts.forEach(jcd => {
+    let contract = new Contract();
+    contract.city = jcd["name"];
+    contract.name = jcd["commercial_name"];
+
+    if(!contract.name)
+    {
+      contract.name = contract.city;
+    }
+
+    contracts.push(contract);
+  });
+
+  return contracts;
+}
 
   // mapping d'un Array de stations JCD vers un Array de stations "maison"
 private jcdToStations(jcdStations){

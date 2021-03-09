@@ -2,19 +2,21 @@
 
   <header>
     <h1>{{title}}</h1>
-    <span>{{nbMessages}} messages à lire</span>
+    <span>{{messages.length}} messages à lire</span>
+    <nav>
+      <a routerLink="/contracts">View contracts</a>
+      |
+      <a routerLink="/creteil">Creteil</a>
+    </nav>
   </header>
 
   <div id="main">
-
-    <app-stations></app-stations>
+    <router-outlet></router-outlet>
 
     <app-messages></app-messages>
-
   </div>
 
   <footer>copyright BCH 2021</footer>
 
 </div>
 
-<router-outlet></router-outlet>
