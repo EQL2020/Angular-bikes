@@ -1,0 +1,8 @@
+<h2>Stations disponibles</h2>
+
+<ul class="stations">
+    <li *ngFor="let station of stations" (click)="onSelect(station)">{{station.name}}</li>
+</ul>
+
+
+<app-station *ngIf="selectedStation" [station]="selectedStation"></app-station>
